@@ -1,8 +1,10 @@
-# Основное приложение
-replicaCount: 2
+# Общие настройки
+name: flask-app
 
+# Flask приложение
+replicaCount: 2
 image:
-  repository: yourusername/flask-app  # замените на ваш образ
+  repository: yourusername/flask-app
   tag: latest
   pullPolicy: Always
 
@@ -10,32 +12,38 @@ service:
   type: LoadBalancer
   port: 80
 
-# PostgreSQL
-postgresql:
-  auth:
-    username: user
-    password: password
-    database: mydb
-  primary:
-    resources:
-      requests:
-        memory: "256Mi"
-        cpu: "200m"
-      limits:
-        memory: "512Mi"
-        cpu: "500m"
-
-# Redis
-redis:
-  auth:
+# PostgreSQL (то, что вы хотели!)
+postgres:
+  image: postgres
+  tag: 13-alpine
+  user: user
+  password: password
+  database: mydb
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  healthcheck:
     enabled: true
-    password: password
-  architecture: standalone
-  master:
-    resources:
-      requests:
-        memory: "128Mi"
-        cpu: "100m"
-      limits:
-        memory: "256Mi"
-        cpu: "200m"
+    initialDelay: 30
+    period: 10
+
+# Redis (то, что вы хотели!)
+redis:
+  image: redis
+  tag: alpine
+  password: ""  # пусто = без пароля
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+  healthcheck:
+    enabled: true
+    initialDelay: 10
+    period: 10
