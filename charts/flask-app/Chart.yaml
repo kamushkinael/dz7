@@ -2,12 +2,12 @@ apiVersion: v2
 name: flask-app
 version: 0.1.0
 dependencies:
-  # PostgreSQL от Bitnami через OCI (работает!)
+  # PostgreSQL — официальный образ с Docker Hub
   - name: postgresql
-    version: "12.6.0"
+    version: "15.5.0"  # Актуальная версия чарта
     repository: oci://registry-1.docker.io/bitnamicharts
     
-  # Redis от groundhog2k (простая и надежная альтернатива)
+  # Redis — официальный образ с Docker Hub  
   - name: redis
-    version: "2.0.5"
-    repository: https://groundhog2k.github.io/helm-charts/
+    version: "20.2.0"  # Актуальная версия чарта
+    repository: oci://registry-1.docker.io/bitnamicharts
