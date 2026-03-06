@@ -4,7 +4,7 @@ name: flask-app
 # Flask приложение
 replicaCount: 2
 image:
-  repository: yourusername/flask-app
+  repository: kamushkinael/flask-app
   tag: latest
   pullPolicy: Always
 
