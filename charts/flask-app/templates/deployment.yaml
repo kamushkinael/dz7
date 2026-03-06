@@ -1,25 +1,53 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-        - name: web
-          image: {{ .Values.image }}
-          env:
-            - name: DATABASE_URL
-              value: "postgresql://user:password@{{ .Release.Name }}-postgresql:5432/mydb"
-            - name: REDIS_HOST
-              value: "{{ .Release.Name }}-redis-master"
-          ports:
-            - containerPort: 80
-
+      - name: web
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"  # <--- ИСПРАВЛЕНО!
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://{{ .Values.postgres.user }}:{{ .Values.postgres.password }}@{{ .Values.name }}-postgres:5432/{{ .Values.postgres.database }}"
+        - name: REDIS_HOST
+          value: "{{ .Values.name }}-redis"
+        - name: REDIS_PORT
+          value: "6379"
+        {{- if .Values.redis.password }}
+        - name: REDIS_PASSWORD
+          value: {{ .Values.redis.password | quote }}
+        {{- end }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory | default "256Mi" }}
+            cpu: {{ .Values.resources.requests.cpu | default "250m" }}
+          limits:
+            memory: {{ .Values.resources.limits.memory | default "512Mi" }}
+            cpu: {{ .Values.resources.limits.cpu | default "500m" }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: 80
