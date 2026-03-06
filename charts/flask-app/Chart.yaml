@@ -4,7 +4,7 @@ version: 0.1.0
 dependencies:
   - name: postgresql
     version: 12.1.0
-    repository: https://bitnami.com
+    repository: https://charts.bitnami.com/bitnami  # <-- Правильный URL репозитория
   - name: redis
     version: 17.4.0
-    repository: https://bitnami.com
+    repository: https://charts.bitnami.com/bitnami  # <-- Тот же URL для обеих зависимостей
