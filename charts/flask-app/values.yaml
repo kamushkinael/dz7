@@ -8,34 +8,27 @@ image:
   tag: latest
   pullPolicy: Always
 
+# Ресурсы для Flask
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+
+# Сервис - МЕНЯЕМ НА NODEPORT!
 service:
-  type: ClusterIP
+  type: NodePort  # Было ClusterIP
   port: 80
 
-# PostgreSQL (то, что вы хотели!)
+# PostgreSQL
 postgres:
   image: postgres
   tag: 13-alpine
   user: user
   password: password
   database: mydb
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "250m"
-    limits:
-      memory: "512Mi"
-      cpu: "500m"
-  healthcheck:
-    enabled: true
-    initialDelay: 30
-    period: 10
-
-# Redis (то, что вы хотели!)
-redis:
-  image: redis
-  tag: alpine
-  password: ""  # пусто = без пароля
   resources:
     requests:
       memory: "128Mi"
@@ -45,14 +38,22 @@ redis:
       cpu: "200m"
   healthcheck:
     enabled: true
-    initialDelay: 10
+    initialDelay: 30
     period: 10
 
-# Ресурсы для Flask приложения
-resources:
-  requests:
-    memory: "256Mi"
-    cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
+# Redis
+redis:
+  image: redis
+  tag: alpine
+  password: ""
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+  healthcheck:
+    enabled: true
+    initialDelay: 10
+    period: 10
