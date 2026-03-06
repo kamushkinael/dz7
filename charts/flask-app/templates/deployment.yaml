@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"  # <--- ИСПРАВЛЕНО!
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 80
@@ -27,17 +27,13 @@ spec:
           value: "{{ .Values.name }}-redis"
         - name: REDIS_PORT
           value: "6379"
-        {{- if .Values.redis.password }}
-        - name: REDIS_PASSWORD
-          value: {{ .Values.redis.password | quote }}
-        {{- end }}
         resources:
           requests:
-            memory: {{ .Values.resources.requests.memory | default "256Mi" }}
-            cpu: {{ .Values.resources.requests.cpu | default "250m" }}
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
           limits:
-            memory: {{ .Values.resources.limits.memory | default "512Mi" }}
-            cpu: {{ .Values.resources.limits.cpu | default "500m" }}
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
 ---
 apiVersion: v1
 kind: Service
@@ -45,9 +41,8 @@ metadata:
   name: {{ .Values.name }}
 spec:
   type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
   selector:
     app: {{ .Values.name }}
-  ports:
-    - protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: 80
