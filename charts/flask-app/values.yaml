@@ -1,4 +1,4 @@
-image: your-docker-hub-user/flask-app:latest
+image: kamushkinael/flask-app:latest
 
 postgresql:
   auth:
