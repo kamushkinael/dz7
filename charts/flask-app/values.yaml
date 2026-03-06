@@ -1,5 +1,7 @@
 # Flask приложение
+name: flask-app
 replicaCount: 2
+
 image:
   repository: kamushkinael/flask-app
   tag: latest
@@ -16,8 +18,3 @@ resources:
 service:
   type: NodePort
   port: 80
-
-# Имена внешних сервисов
-externalServices:
-  postgresHost: "flask-app-postgres"  # Будет заменено на имя релиза PostgreSQL
-  redisHost: "flask-app-redis"         # Будет заменено на имя релиза Redis
