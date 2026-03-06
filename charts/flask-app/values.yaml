@@ -2,7 +2,7 @@
 name: flask-app
 
 # Flask приложение
-replicaCount: 2
+replicaCount: 1
 image:
   repository: kamushkinael/flask-app
   tag: latest
