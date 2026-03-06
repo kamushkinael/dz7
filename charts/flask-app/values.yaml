@@ -47,3 +47,12 @@ redis:
     enabled: true
     initialDelay: 10
     period: 10
+
+# Ресурсы для Flask приложения
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
