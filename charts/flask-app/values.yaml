@@ -1,4 +1,4 @@
-# Flask приложение
+# Flaska
 name: flask-app
 replicaCount: 2
 
