@@ -9,7 +9,7 @@ image:
   pullPolicy: Always
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
 # PostgreSQL (то, что вы хотели!)
