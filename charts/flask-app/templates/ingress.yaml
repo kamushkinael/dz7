@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.name }}
+  name: {{ .Values.name }}-ingress  # <--- УНИКАЛЬНОЕ ИМЯ
 spec:
   rules:
-  - host: flask-app.local  # или ваш реальный домен
+  - host: flask-app.local
     http:
       paths:
       - pathType: Prefix
