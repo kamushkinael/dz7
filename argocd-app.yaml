@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/kamushkinael/dz7.git' # ТВОЙ РЕПОЗИТОРИЙ
+    repoURL: 'https://github.com/kamushkinael/dz7.git'
     targetRevision: HEAD
     path: charts/flask-app
   destination:
