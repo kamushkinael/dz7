@@ -6,11 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com' # ТВОЙ РЕПОЗИТОРИЙ
+    repoURL: 'https://github.com/kamushkinael/dz7.git' # ТВОЙ РЕПОЗИТОРИЙ
     targetRevision: HEAD
     path: charts/flask-app
   destination:
-    server: 'https://default.svc'
+    server: 'https://kubernetes.default.svc'
     namespace: default
   syncPolicy:
     automated:
