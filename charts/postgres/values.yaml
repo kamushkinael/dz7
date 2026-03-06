@@ -1,0 +1,27 @@
+# PostgreSQL настройки
+replicaCount: 1
+image:
+  repository: postgres
+  tag: 13-alpine
+  pullPolicy: IfNotPresent
+
+database:
+  user: user
+  password: password
+  name: mydb
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: ""
+
+service:
+  port: 5432

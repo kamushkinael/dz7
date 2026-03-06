@@ -1,0 +1,21 @@
+# Redis настройки
+replicaCount: 1
+image:
+  repository: redis
+  tag: alpine
+  pullPolicy: IfNotPresent
+
+auth:
+  enabled: false
+  password: ""
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+
+service:
+  port: 6379
