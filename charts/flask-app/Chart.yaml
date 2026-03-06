@@ -2,9 +2,9 @@ apiVersion: v2
 name: flask-app
 version: 0.1.0
 dependencies:
-  - name: postgresql
-    version: 12.1.0
-    repository: https://charts.bitnami.com/bitnami  # <-- Правильный URL репозитория
-  - name: redis
-    version: 17.4.0
-    repository: https://charts.bitnami.com/bitnami  # <-- Тот же URL для обеих зависимостей
+  - name: cloudnative-pg
+    version: "0.21.5"  # Актуальная версия CloudNativePG
+    repository: https://cloudnative-pg.github.io/charts
+  - name: redis-ha
+    version: "4.22.4"  # Актуальная версия redis-ha
+    repository: https://dandydeveloper.github.io/charts/
