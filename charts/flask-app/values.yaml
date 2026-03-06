@@ -1,11 +1,44 @@
-image: kamushkinael/flask-app:latest
-
+# PostgreSQL настройки
 postgresql:
+  image:
+    registry: docker.io
+    repository: bitnami/postgresql
+    tag: 16.3.0-debian-12-r20
+    pullPolicy: IfNotPresent
   auth:
-    database: mydb
-    username: user
-    password: password
+    username: flaskuser
+    password: flaskpass123
+    database: flaskdb
+    postgresPassword: postgresadmin123
+  primary:
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "200m"
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    persistence:
+      size: 1Gi
 
+# Redis настройки (новые)
 redis:
+  image:
+    registry: docker.io
+    repository: bitnami/redis
+    tag: 7.2.5-debian-12-r14
+    pullPolicy: IfNotPresent
+  architecture: standalone  # Пока standalone для простоты
   auth:
-    enabled: false
+    enabled: true
+    password: redispass123
+  master:
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
+    persistence:
+      size: 1Gi
