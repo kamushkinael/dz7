@@ -1,15 +1,21 @@
-# PostgreSQL настройки
+# Основное приложение
+replicaCount: 2
+
+image:
+  repository: yourusername/flask-app  # замените на ваш образ
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 80
+
+# PostgreSQL
 postgresql:
-  image:
-    registry: docker.io
-    repository: bitnami/postgresql
-    tag: 16.3.0-debian-12-r20
-    pullPolicy: IfNotPresent
   auth:
-    username: flaskuser
-    password: flaskpass123
-    database: flaskdb
-    postgresPassword: postgresadmin123
+    username: user
+    password: password
+    database: mydb
   primary:
     resources:
       requests:
@@ -18,20 +24,13 @@ postgresql:
       limits:
         memory: "512Mi"
         cpu: "500m"
-    persistence:
-      size: 1Gi
 
-# Redis настройки (новые)
+# Redis
 redis:
-  image:
-    registry: docker.io
-    repository: bitnami/redis
-    tag: 7.2.5-debian-12-r14
-    pullPolicy: IfNotPresent
-  architecture: standalone  # Пока standalone для простоты
   auth:
     enabled: true
-    password: redispass123
+    password: password
+  architecture: standalone
   master:
     resources:
       requests:
@@ -40,5 +39,3 @@ redis:
       limits:
         memory: "256Mi"
         cpu: "200m"
-    persistence:
-      size: 1Gi

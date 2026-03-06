@@ -2,9 +2,12 @@ apiVersion: v2
 name: flask-app
 version: 0.1.0
 dependencies:
+  # PostgreSQL официальный образ
   - name: postgresql
-    version: "15.5.0"
-    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 12.5.0
+    repository: https://charts.bitnami.com/bitnami
+    
+  # Redis официальный образ  
   - name: redis
-    version: "20.2.0"
-    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 17.3.0
+    repository: https://charts.bitnami.com/bitnami
