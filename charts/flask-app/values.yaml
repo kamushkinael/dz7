@@ -1,0 +1,11 @@
+image: your-docker-hub-user/flask-app:latest
+
+postgresql:
+  auth:
+    database: mydb
+    username: user
+    password: password
+
+redis:
+  auth:
+    enabled: false
